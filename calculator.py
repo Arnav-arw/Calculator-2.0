@@ -1,388 +1,96 @@
-import tkinter as tk
-from tkinter import ttk
-from tkinter import messagebox
+from tkinter import *
 
-class Inside:
-    def __init__(self, parent):
-        self.parent = parent
-        self.cal_frame = ttk.Frame(self.parent)
-        self.cal_frame.grid(row=0, column=0)
-        self.out_var = tk.StringVar()
-        self.opr = tk.StringVar()
-        self.value1 = tk.StringVar()
-        self.value2 = tk.StringVar()
-        self.output_box() 
-        self.cal_buttons() 
+root = Tk()
+root.title("Simple Calculator")
 
-    def output_box(self):
-        show = ttk.Entry(
-            self.cal_frame,
-            textvariable=self.out_var,
-            width=25,
-            font=("calibri", 16),
-            state="readonly",
-        )
-        show.grid(row=0, column=0, sticky=tk.W, ipady=6, ipadx=1, columnspan=4)
-        show.focus()
+e = Entry(root, width=35, borderwidth=5)
+e.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
+
+# All the functions
+
+def button_click(number):
+    #e.delete(0, END)
+    current = e.get()
+    e.delete(0, END)
+    e.insert(0, str(current) + str(number))
 
 
-    def press_0(self):
-        current = self.out_var.get()
-        if current == "":
-            self.out_var.set(0)
-        else:
-            current += str(0)
-            self.out_var.set(current)
-
-    def press_1(self):
-        current = self.out_var.get()
-        if current == "":
-            self.out_var.set(1)
-        else:
-            current += str(1)
-            self.out_var.set(current)
-
-    def press_2(self):
-        current = self.out_var.get()
-        if current == "":
-            self.out_var.set(2)
-        else:
-            current += str(2)
-            self.out_var.set(current)
-
-    def press_3(self):
-        current = self.out_var.get()
-        if current == "":
-            self.out_var.set(3)
-        else:
-            current += str(3)
-            self.out_var.set(current)
-
-    def press_4(self):
-        current = self.out_var.get()
-        if current == "":
-            self.out_var.set(4)
-        else:
-            current += str(4)
-            self.out_var.set(current)
-
-    def press_5(self):
-        current = self.out_var.get()
-        if current == "":
-            self.out_var.set(5)
-        else:
-            current += str(5)
-            self.out_var.set(current)
-
-    def press_6(self):
-        current = self.out_var.get()
-        if current == "":
-            self.out_var.set(6)
-        else:
-            current += str(6)
-            self.out_var.set(current)
-
-    def press_7(self):
-        current = self.out_var.get()
-        if current == "":
-            self.out_var.set(7)
-        else:
-            current += str(7)
-            self.out_var.set(current)
-
-    def press_8(self):
-        current = self.out_var.get()
-        if current == "":
-            self.out_var.set(8)
-        else:
-            current += str(8)
-            self.out_var.set(current)
-
-    def press_9(self):
-        current = self.out_var.get()
-        if current == "":
-            self.out_var.set(9)
-        else:
-            current += str(9)
-            self.out_var.set(current)
+def button_clear():
+    e.delete(0, END)
 
 
-    def press_clear(self):
-        self.out_var.set("")
-
-    def press_reset(self):
-        self.out_var.set("")
-
-    def press_plus(self):
-        self.value1 = self.out_var.get()
-        if self.value1 == "":
-            messagebox.showwarning(
-                "Operator Before Number", "Please Enter Number Before Operator"
-            )
-        else:
-            self.out_var.set("")
-            self.opr = "+"
-
-    def press_min(self):
-        self.value1 = self.out_var.get()
-        if self.value1 == "":
-            messagebox.showwarning(
-                "Operator Before Number", "Please Enter Number Before Operator"
-            )
-        else:
-            self.out_var.set("")
-            self.opr = "-"
-
-    def press_mul(self):
-        self.value1 = self.out_var.get()
-        if self.value1 == "":
-            messagebox.showwarning(
-                "Operator Before Number", "Please Enter Number Before Operator"
-            )
-        else:
-            self.out_var.set("")
-            self.opr = "*"
-
-    def press_div(self):
-        self.value1 = self.out_var.get()
-        if self.value1 == "":
-            messagebox.showwarning(
-                "Operator Before Number", "Please Enter Number Before Operator"
-            )
-        else:
-            self.out_var.set("")
-            self.opr = "/"
-
-    def press_equal(self):
-        self.value2 = self.out_var.get()
-        if self.value2 == "":
-            messagebox.showerror(
-                "Second Number", "Please Enter Second Number To Perform Calculation"
-            )
-        else:
-
-            try:
-                if self.opr == "+":
-                    self.value1 = int(self.value1)
-                    self.value2 = int(self.value2)
-                    result = self.value1 + self.value2
-                    self.out_var.set(result)
-                if self.opr == "-":
-                    self.value1 = int(self.value1)
-                    self.value2 = int(self.value2)
-                    result = self.value1 - self.value2
-                    self.out_var.set(result)
-                if self.opr == "*":
-                    self.value1 = int(self.value1)
-                    self.value2 = int(self.value2)
-                    result = self.value1 * self.value2
-                    self.out_var.set(result)
-                if self.opr == "/":
-                    self.value1 = int(self.value1)
-                    self.value2 = int(self.value2)
-                    result = self.value1 / self.value2
-                    self.out_var.set(result)
-
-            except ValueError:
-                messagebox.showinfo(
-                    "Restart", "Please Close And Restart Application...Sorry"
-                )
-
-    def cal_buttons(self):
-        btn_c = tk.Button(
-            self.cal_frame,
-            text="Clear",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#58a8e0",
-            command=self.press_clear,
-        )
-        btn_c.grid(row=1, column=0, sticky=tk.W, pady=5)
-        btn_div = tk.Button(
-            self.cal_frame,
-            text="/",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#58a8e0",
-            command=self.press_div,
-        )
-        btn_div.grid(row=1, column=1, sticky=tk.W)
-        btn_mul = tk.Button(
-            self.cal_frame,
-            text="*",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#58a8e0",
-            command=self.press_mul,
-        )
-        btn_mul.grid(row=1, column=2, sticky=tk.E)
-        btn_min = tk.Button(
-            self.cal_frame,
-            text="-",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#58a8e0",
-            command=self.press_min,
-        )
-        btn_min.grid(row=1, column=3, sticky=tk.E)
-        btn_7 = tk.Button(
-            self.cal_frame,
-            text="7",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#90a9b8",
-            command=self.press_7,
-        )
-        btn_7.grid(row=2, column=0, sticky=tk.W, pady=2)
-        btn_8 = tk.Button(
-            self.cal_frame,
-            text="8",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#90a9b8",
-            command=self.press_8,
-        )
-        btn_8.grid(row=2, column=1, sticky=tk.W)
-        btn_9 = tk.Button(
-            self.cal_frame,
-            text="9",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#90a9b8",
-            command=self.press_9,
-        )
-        btn_9.grid(row=2, column=2, sticky=tk.E)
-        btn_plus = tk.Button(
-            self.cal_frame,
-            text="+",
-            width=6,
-            height=5,
-            bd=2,
-            bg="#58a8e0",
-            command=self.press_plus,
-        )
-        btn_plus.grid(row=2, column=3, sticky=tk.E, rowspan=2)
-        btn_4 = tk.Button(
-            self.cal_frame,
-            text="4",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#90a9b8",
-            command=self.press_4,
-        )
-        btn_4.grid(row=3, column=0, sticky=tk.W, pady=2)
-        btn_5 = tk.Button(
-            self.cal_frame,
-            text="5",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#90a9b8",
-            command=self.press_5,
-        )
-        btn_5.grid(row=3, column=1, sticky=tk.W)
-        btn_6 = tk.Button(
-            self.cal_frame,
-            text="6",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#90a9b8",
-            command=self.press_6,
-        )
-        btn_6.grid(row=3, column=2, sticky=tk.E)
-        btn_1 = tk.Button(
-            self.cal_frame,
-            text="1",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#90a9b8",
-            command=self.press_1,
-        )
-        btn_1.grid(row=4, column=0, sticky=tk.W, pady=2)
-        btn_2 = tk.Button(
-            self.cal_frame,
-            text="2",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#90a9b8",
-            command=self.press_2,
-        )
-        btn_2.grid(row=4, column=1, sticky=tk.W)
-        btn_3 = tk.Button(
-            self.cal_frame,
-            text="3",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#90a9b8",
-            command=self.press_3,
-        )
-        btn_3.grid(row=4, column=2, sticky=tk.E)
-        btn_equal = tk.Button(
-            self.cal_frame,
-            text="=",
-            width=6,
-            height=5,
-            bd=2,
-            bg="orange",
-            command=self.press_equal,
-        )
-        btn_equal.grid(row=4, column=3, sticky=tk.E, rowspan=2)
-        # ===== Row 5 =====
-        btn_0 = tk.Button(
-            self.cal_frame,
-            text="0",
-            width=14,
-            height=2,
-            bd=2,
-            bg="#90a9b8",
-            command=self.press_0,
-        )
-        btn_0.grid(row=5, column=0, sticky=tk.W, pady=2, columnspan=2)
-        btn_reset = tk.Button(
-            self.cal_frame,
-            text="Reset",
-            width=6,
-            height=2,
-            bd=2,
-            bg="#90a9b8",
-            command=self.press_reset,
-        )
-        btn_reset.grid(row=5, column=2, sticky=tk.E)
+def button_add():
+    first_number = e.get()
+    global f_num
+    global math
+    math = "addition"
+    f_num = int(first_number)
+    e.delete(0, END)
 
 
-class Main(tk.Tk):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.title("Calculator")
-        self.geometry_settings()
+def button_equal():
+    second_number = e.get()
+    e.delete(0, END)
 
-    def geometry_settings(self):
-        _com_width = self.winfo_screenwidth()
-        _com_height = self.winfo_screenheight()
-        _my_width = 360
-        _my_height = 350
-        _x = int(_com_width / 2 - _my_width / 2)
-        _y = int(_com_height / 2 - _my_height / 2)
-        geo_string = (
-            str(_my_width) + "x" + str(_my_height) + "+" + str(_x) + "+" + str(_y)
-        )
-        self.geometry(geo_string)
-        self.resizable(width=False, height=False)
+    if math == "addition":
+        e.insert(0, f_num + int(second_number))
+
+    if math == "subtraction":
+        e.insert(0, f_num - int(second_number))
+
+    if math == "multiplication":
+        e.insert(0, f_num * int(second_number))
+
+    if math == "division":
+        e.insert(0, f_num / int(second_number))
 
 
-if __name__ == "__main__":
-    calculator = Main()
-    Inside(calculator)
-    calculator.mainloop()
+def button_subtract():
+    first_number = e.get()
+    global f_num
+    global math
+    math = "subtraction"
+    f_num = int(first_number)
+    e.delete(0, END)
+
+
+def button_multiply():
+    first_number = e.get()
+    global f_num
+    global math
+    math = "multiplication"
+    f_num = int(first_number)
+    e.delete(0, END)
+
+
+def button_divide():
+    first_number = e.get()
+    global f_num
+    global math
+    math = "division"
+    f_num = int(first_number)
+    e.delete(0, END)
+
+
+# Define Buttons along with their places
+
+button_1 = Button(root, text="1", padx=40, pady=20,command=lambda: button_click(1)).grid(row=3, column=0)
+button_2 = Button(root, text="2", padx=40, pady=20,command=lambda: button_click(2)).grid(row=3, column=1)
+button_3 = Button(root, text="3", padx=40, pady=20,command=lambda: button_click(3)).grid(row=3, column=2)
+button_4 = Button(root, text="4", padx=40, pady=20,command=lambda: button_click(4)).grid(row=2, column=0)
+button_5 = Button(root, text="5", padx=40, pady=20,command=lambda: button_click(5)).grid(row=2, column=1)
+button_6 = Button(root, text="6", padx=40, pady=20,command=lambda: button_click(6)).grid(row=2, column=2)
+button_7 = Button(root, text="7", padx=40, pady=20,command=lambda: button_click(7)).grid(row=1, column=0)
+button_8 = Button(root, text="8", padx=40, pady=20,command=lambda: button_click(8)).grid(row=1, column=1)
+button_9 = Button(root, text="9", padx=40, pady=20,command=lambda: button_click(9)).grid(row=1, column=2)
+button_0 = Button(root, text="0", padx=40, pady=20,command=lambda: button_click(0)).grid(row=4, column=0)
+
+button_add = Button(root, text="+", padx=39, pady=20, command=button_add).grid(row=5, column=0)
+button_equal = Button(root, text="=", padx=91, pady=20, command=button_equal).grid(row=5, column=1, columnspan=2)
+button_clear = Button(root, text="Clear", padx=91, pady=20, command=button_clear).grid(row=4, column=1, columnspan=2)
+button_subtract = Button(root, text="-", padx=41,pady=20, command=button_subtract).grid(row=6, column=0)
+button_multiply = Button(root, text="*", padx=40,pady=20, command=button_multiply).grid(row=6, column=1)
+button_divide = Button(root, text="/", padx=41, pady=20, command=button_divide).grid(row=6, column=2)
+
+
+root.mainloop()
