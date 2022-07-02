@@ -85,8 +85,8 @@ button_9 = Button(root, text="9", padx=40, pady=20,command=lambda: button_click(
 button_0 = Button(root, text="0", padx=40, pady=20,command=lambda: button_click(0)).grid(row=4, column=0)
 
 button_add = Button(root, text="+", padx=39, pady=20, command=button_add).grid(row=5, column=0)
-button_equal = Button(root, text="=", padx=91, pady=20, command=button_equal).grid(row=5, column=1, columnspan=2)
-button_clear = Button(root, text="Clear", padx=91, pady=20, command=button_clear).grid(row=4, column=1, columnspan=2)
+button_equal = Button(root, text="=", padx=100, pady=20, command=button_equal).grid(row=5, column=1, columnspan=2)
+button_clear = Button(root, text="Clear", padx=88, pady=20, command=button_clear).grid(row=4, column=1, columnspan=2)
 button_subtract = Button(root, text="-", padx=41,pady=20, command=button_subtract).grid(row=6, column=0)
 button_multiply = Button(root, text="*", padx=40,pady=20, command=button_multiply).grid(row=6, column=1)
 button_divide = Button(root, text="/", padx=41, pady=20, command=button_divide).grid(row=6, column=2)
